@@ -1,0 +1,30 @@
+###
+GET http://localhost:8000/ticket
+
+###
+GET http://localhost:8000/ticket/7
+
+###
+POST http://localhost:8000/ticket
+Content-Type: application/json
+
+{
+    "name_user": "Leo",
+    "title": "Teste de ticket",
+    "description": "Descrição do teste"
+}
+
+###
+PUT http://localhost:8000/ticket/
+Content-Type: application/json
+
+{
+    "id": 7,
+    "name_user": "Jhonatan Azevedo 7",
+    "title": "Teste de ticket 7",
+    "description": "Descrição do teste 7",
+    "status": 2	
+}
+
+###
+DELETE http://localhost:8000/ticket/5

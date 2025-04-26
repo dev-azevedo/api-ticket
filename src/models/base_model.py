@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 class BaseModel:
-    __abastract__ = True
+    __abstract__  = True
     
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     created_at = Column(DateTime, default=func.now(), nullable=False)

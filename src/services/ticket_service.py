@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
-from models.ticket import Ticket
+from src.DTO.ticket_dto import TicketCreateDTO, TicketGetDTO
+from src.models.ticket import Ticket
 
 class TicketService:
     def __init__(self, db: Session):
@@ -17,10 +18,19 @@ class TicketService:
         
         return ticket
     
-    def create(self, ticket):
-        self.db.add(ticket)
+    def create(self, ticket: TicketCreateDTO):
+        ticket_format = Ticket(name_user=ticket.name_user, title=ticket.title, description=ticket.description)
+        self.db.add(ticket_format)
         self.db.commit()
-        return ticket
+        self.db.refresh(ticket_format)  # Refresh to get the generated ID
+    
+        # Return as TicketGetDTO with the ID
+        return TicketGetDTO(
+            id=ticket_format.id,
+            name_user=ticket_format.name_user,
+            title=ticket_format.title,
+            description=ticket_format.description
+        )
     
     def update(self, ticket): 
         ticket_on_db = self.get_by_id(ticket.id)
@@ -31,7 +41,14 @@ class TicketService:
         ticket_on_db.status = ticket.status
         
         self.db.commit()
-        return ticket_on_db
+        self.db.refresh(ticket_on_db)  # Refresh to get the updated data
+        
+        return TicketGetDTO(
+            id=ticket_on_db.id,
+            name_user=ticket_on_db.name_user,
+            title=ticket_on_db.title,
+            description=ticket_on_db.description
+        )
         
     def delete(self, id): 
         ticket_on_db = self.get_by_id(id)

@@ -1,5 +1,5 @@
-from models.ticket import Ticket
-from infra.database_config import engine
+from src.infra.database_config import engine
+from src.models import (ticket)
 
 def create_tables():
-    Ticket.Base.metadata.create_all(engine)
+    ticket.Base.metadata.create_all(bind=engine)
