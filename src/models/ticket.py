@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String
 from src.models.base_model import BaseModel
-from src.enum.status_enum import EStutus
+from src.enum.ticket_status_enum import ETicketStatus
 
 
 class Ticket(BaseModel):
@@ -9,4 +9,4 @@ class Ticket(BaseModel):
     name_user = Column(String(255), nullable=False)
     title = Column(String(150), nullable=False)
     description = Column(String(255), nullable=False)
-    status = Column(Integer, default=EStutus.OPEN.value, nullable=False)
+    status = Column(Integer, default=ETicketStatus.OPEN.value, nullable=False)

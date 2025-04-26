@@ -33,7 +33,6 @@ class TicketService:
         self.db.commit()
         return ticket_on_db
         
-        
     def delete(self, id): 
         ticket_on_db = self.get_by_id(id)
         ticket_on_db.active = False
