@@ -6,6 +6,7 @@ from src.enum.status_enum import EStutus
 class Ticket(BaseModel):
     __tablename__ = 'tickets'
     
+    name_user = Column(String(255), nullable=False)
     title = Column(String(150), nullable=False)
     description = Column(String(255), nullable=False)
     status = Column(Integer, default=EStutus.OPEN.value, nullable=False)
